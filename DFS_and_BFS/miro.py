@@ -8,6 +8,15 @@
 #칸을 셀 때는 시작 칸과 마지막 칸을 모두 포함해서 계산합니다.
 from collections import deque
 
+n, m = map(int,input().split())
+
+graph = []
+for i in range(n):
+    graph.append(list(map(int,input())))
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
 def bfs(x, y):
     queue = deque()
     queue.append((x,y))
@@ -19,25 +28,15 @@ def bfs(x, y):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if nx < 0 or nx >= n or ny < 0  or ny >= m:
+            if nx < 0 or ny < 0 or nx >= n or ny >= m:
                 continue
-                
-            if miro[nx][ny] == 0:
+            
+            if graph[nx][ny] == 0:
                 continue
-            if miro[nx][ny] == 1:
-                miro[nx][ny] = miro[nx][ny]+1
+            
+            if graph[nx][ny] == 1:
+                graph[nx][ny] = graph[x][y] + 1
                 queue.append((nx,ny))
-    
-    return miro[n-1][m-1]
-
-miro = []
-n, m = map(int, input().split())
-
-for i in range(n):
-    miro.append(list(map(int,input())))
-
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+    return graph[n-1][m-1]
 
 print(bfs(0,0))
-
