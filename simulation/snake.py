@@ -51,9 +51,11 @@ def simulation():
             break
         x, y = nx, ny
         time += 1
-        
+
         if index < l and time == info[index][0]:
             direction = turn(direction, info[index][1])
             index += 1
 
     return time
+
+    print(simulation())
